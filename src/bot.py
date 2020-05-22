@@ -31,6 +31,6 @@ for submission in reddit.subreddit('RedditsQuests').new(limit=None):
                             else:
                                 reddit.subreddit('RedditsQuests').flair.set(comment.parent().author.name, "1ᚬ", "QuestFairer")
                             submission.save()
-                            reply = 'This quest has been completed, but feel free to go ahead and recomplete this quest! \n\n^Beep ^boop^. ^Contact ^my ^creator ^Bobbbay^.'.format(completer)
+                            reply = 'This quest has been completed, but feel free to go ahead and recomplete this quest! Upvote me if you think this quest was quite nice. Good quest creators and/or executors may recieve a prize!\n\n^Beep ^boop^. ^Contact ^my ^creator ^Bobbbay^.'.format(completer)
                             submission.reply(reply).mod.distinguish(sticky=True)
                     break
