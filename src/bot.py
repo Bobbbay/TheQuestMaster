@@ -28,10 +28,10 @@ for submission in reddit.subreddit('RedditsQuests').new(limit=None):
                                 count += 1
                                 newflair = "{0}ᚬ".format(count)
                                 completer = comment.parent().author.name
-                                reddit.subreddit('bobbbaybots').flair.set(comment.parent().author.name, newflair, "QuestFairer")
+                                reddit.subreddit('RedditsQuests').flair.set(comment.parent().author.name, newflair, "QuestFairer")
                                 print("EDITED FLAIR")
                             else:
-                                reddit.subreddit('bobbbaybots').flair.set(comment.parent().author.name, "1ᚬ", "QuestFairer")
+                                reddit.subreddit('RedditsQuests').flair.set(comment.parent().author.name, "1ᚬ", "QuestFairer")
                                 print("NEWBYYYY")
                             submission.save()
                             reply = 'This quest has been completed by {0}, but feel free to go ahead and recomplete this quest! \n\n^Beep ^boop^. ^Contact ^my ^creator ^Bobbbay^.'.format(completer)
