@@ -18,7 +18,6 @@ for submission in reddit.subreddit('RedditsQuests').new(limit=None):
     if 1:
         submission.comments.replace_more(limit=None)
         for comment in submission.comments.list():
-            print(comment.body)
             if (re.search('!completed', comment.body) is not None):
                     if comment.is_submitter:
                         if submission.saved is False:
@@ -29,11 +28,9 @@ for submission in reddit.subreddit('RedditsQuests').new(limit=None):
                                 newflair = "{0}ᚬ".format(count)
                                 completer = comment.parent().author.name
                                 reddit.subreddit('RedditsQuests').flair.set(comment.parent().author.name, newflair, "QuestFairer")
-                                print("EDITED FLAIR")
                             else:
                                 reddit.subreddit('RedditsQuests').flair.set(comment.parent().author.name, "1ᚬ", "QuestFairer")
-                                print("NEWBYYYY")
                             submission.save()
-                            reply = 'This quest has been completed by {0}, but feel free to go ahead and recomplete this quest! \n\n^Beep ^boop^. ^Contact ^my ^creator ^Bobbbay^.'.format(completer)
+                            reply = 'This quest has been completed, but feel free to go ahead and recomplete this quest! \n\n^Beep ^boop^. ^Contact ^my ^creator ^Bobbbay^.'.format(completer)
                             submission.reply(reply).mod.distinguish(sticky=True)
                     break
