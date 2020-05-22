@@ -22,7 +22,6 @@ reddit = praw.Reddit(client_id=client_id,
 
 for submission in reddit.subreddit(sub).new(limit=None):
     if 1:
-        print(submission.flair.choices())
         submission.comments.replace_more(limit=None)
         for comment in submission.comments.list():
             if (re.search('!completed', comment.body) is not None):
@@ -43,7 +42,6 @@ for submission in reddit.subreddit(sub).new(limit=None):
                                 reddit.subreddit(sub).flair.set(submission.author.name, "1ᚬ", "QuestFairer")
                                 reddit.subreddit(sub).flair.set(comment.parent().author.name, "2ᚬ", "QuestFairer")
                             submission.flair.select("4b693aec-88af-11ea-987a-0ed65c655b8f", "Completed!")
-                            print(submission.flair.choices())
                             submission.save()
                             reply = 'This quest has been completed, but feel free to go ahead and recomplete this quest! \n\nUpvote me if you think this quest was quite nice. Good quest creators and/or executors may recieve a prize!\n\n^Beep ^boop^. ^Contact ^my ^creator ^Bobbbay^.'.format(completer)
                             submission.reply(reply).mod.distinguish(sticky=True)
