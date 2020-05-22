@@ -8,9 +8,9 @@ import praw
 import os
 import re
 
-reddit = praw.Reddit(os.environ.get('client_id'),
-                     os.environ.get('client_secret'),
-                     os.environ.get('pass')
+reddit = praw.Reddit(client_id=os.environ.get('client_id'),
+                     client_secret=os.environ.get('client_secret'),
+                     password=os.environ.get('pass'),
                      user_agent='r/RedditsQuests bot',
                      username='TheQuestMaster')
 
