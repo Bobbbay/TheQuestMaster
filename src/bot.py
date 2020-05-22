@@ -10,9 +10,9 @@ import re
 
 sub = "RedditsQuests"
 
-client_id = "T-VB-ecVtjieoA" # os.environ.get('client_id')
-client_secret = "mC3X2iQkmS6EK6tQXKNg1mT6_H4" # os.environ.get('client_secret')
-password = "iamabot002" # os.environ.get('pass')
+client_id = os.environ.get('client_id')
+client_secret = os.environ.get('client_secret')
+password = os.environ.get('pass')
 
 reddit = praw.Reddit(client_id=client_id,
                      client_secret=client_secret,
