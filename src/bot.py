@@ -52,8 +52,8 @@ for submission in reddit.subreddit(sub).new(limit=None):
                                     submission.save()
                                     reply = 'This quest has been completed, but feel free to go ahead and recomplete this quest! \n\n^Upvote ^me ^if ^you ^think ^this ^quest ^was ^quite ^nice^. ^Beep ^boop^. ^Contact ^my ^creator ^Bobbbay^.'
                                     submission.reply(reply).mod.distinguish(sticky=True)
-                            else:
-                                comment.mod.remove()
-                                submission.author.message('Your comment in r/redditsquests has been removed', 'We only allow approvals that contain links. It\'s not your fault, but next time make sure the person who has completed the quest provides a link. PM u/MaxwellIsSmall for questions about this sub\'s rules and u/Bobbbay for any questions, concerns, or comments about the bot. ')
+                                else:
+                                    comment.mod.remove()
+                                    submission.author.message('Your comment in r/redditsquests has been removed', 'We only allow approvals that contain links. It\'s not your fault, but next time make sure the person who has completed the quest provides a link. PM u/MaxwellIsSmall for questions about this sub\'s rules and u/Bobbbay for any questions, concerns, or comments about the bot. ')
                             break
                             
