@@ -2,7 +2,7 @@ import praw
 import os
 import re
 
-sub = "BobbbayBots"
+sub = "RedditsQuests"
 
 client_id = os.environ.get('client_id')
 client_secret = os.environ.get('client_secret')
@@ -36,7 +36,7 @@ for submission in reddit.subreddit(sub).new(limit=None):
                                 else:
                                     reddit.subreddit(sub).flair.set(submission.author.name, "1ᚬ", "QuestFairer")
                                     reddit.subreddit(sub).flair.set(comment.parent().author.name, "2ᚬ", "QuestFairer")
-                                #submission.flair.select("4b693aec-88af-11ea-987a-0ed65c655b8f", "Completed!")
+                                submission.flair.select("4b693aec-88af-11ea-987a-0ed65c655b8f", "Completed!")
                                 submission.save()
                                 reply = 'This quest has been completed, but feel free to go ahead and recomplete this quest! \n\nUpvote me if you think this quest was quite nice. Good quest creators and/or executors may recieve a prize!\n\n^Beep ^boop^. ^Contact ^my ^creator ^Bobbbay^.'
                                 submission.reply(reply).mod.distinguish(sticky=True)
