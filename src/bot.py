@@ -4,7 +4,7 @@ import re
 import re
 from bs4 import BeautifulSoup as BS
 
-sub = "BobbbayBots"
+sub = "RedditsQuests"
 
 client_id = os.environ.get('client_id')
 client_secret = os.environ.get('client_secret')
