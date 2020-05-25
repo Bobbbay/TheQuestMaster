@@ -27,7 +27,6 @@ for submission in reddit.subreddit(sub).new(limit=None):
                     if submission.saved is False:
                         if (comment.parent().author.name is not submission.author.name):
                             if(find(comment.parent().body) != []):
-                                if
                                 completer = ""
                                 if comment.parent().author_flair_text and comment.parent().author_flair_text.endswith("ᚬ"):
                                     count_taker = int(comment.parent().author_flair_text.replace("ᚬ",""))
