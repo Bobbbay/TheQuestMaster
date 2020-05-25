@@ -27,6 +27,7 @@ for submission in reddit.subreddit(sub).new(limit=None):
                     if submission.saved is False:
                         if (comment.parent().author.name is not submission.author.name):
                             if(find(comment.parent().body) != []):
+                                if
                                 completer = ""
                                 if comment.parent().author_flair_text and comment.parent().author_flair_text.endswith("ᚬ"):
                                     count_taker = int(comment.parent().author_flair_text.replace("ᚬ",""))
@@ -53,4 +54,3 @@ for submission in reddit.subreddit(sub).new(limit=None):
                                 comment.mod.remove()
                                 submission.author.message('Your comment in r/redditsquests has been removed', 'We only allow approvals that contain links. It\'s not your fault, but next time make sure the person who has completed the quest provides a link. PM u/MaxwellIsSmall for questions about this sub\'s rules and u/Bobbbay for any questions, concerns, or comments about the bot. ')
                         break
-                        
