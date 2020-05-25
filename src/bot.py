@@ -1,8 +1,10 @@
 import praw
 import os
 import re
+import re
+from bs4 import BeautifulSoup as BS
 
-sub = "RedditsQuests"
+sub = "BobbbayBots"
 
 client_id = os.environ.get('client_id')
 client_secret = os.environ.get('client_secret')
@@ -22,11 +24,34 @@ def find(string):
 for submission in reddit.subreddit(sub).new(limit=None):
     submission.comments.replace_more(limit=None)
     for comment in submission.comments.list():
-        if (re.search('!completed', comment.body) is not None):
+        if (re.search('!completed', comment.body, re.IGNORECASE) is not None):
                 if comment.is_submitter:
                     if submission.saved is False:
                         if (comment.parent().author.name is not submission.author.name):
-                            if(find(comment.parent().body) != []):
+
+                            soup = BS("""
+                            <i class="fa fa-edit"></i> Edit
+                            """)
+
+                            links = soup.find_all('a')
+
+                            thelink = ""
+                            for link in links:
+                                if link.find(text=re.compile("Edit")):
+                                    thelink = link
+                                    break
+
+                            if(find(comment.parent().body) != [] or thelink != ""):
+                                for flair in reddit.subreddit(sub).flair(redditor=submission.author, limit=None):
+                                    count_op_str = flair['flair_text']
+                                if ( count_op_str != "" ):
+                                    print(count_op_str)
+                                    count_op = int(count_op_str.replace("ᚬ", ""))
+                                    count_op += 1
+                                    op_flair = "{0}ᚬ".format(count_op)
+                                    reddit.subreddit(sub).flair.set(submission.author.name, op_flair, "QuestFairer")
+                                else:
+                                    reddit.subreddit(sub).flair.set(submission.author.name, "1ᚬ", "QuestFairer")
                                 completer = ""
                                 if comment.parent().author_flair_text and comment.parent().author_flair_text.endswith("ᚬ"):
                                     count_taker = int(comment.parent().author_flair_text.replace("ᚬ",""))
@@ -36,15 +61,7 @@ for submission in reddit.subreddit(sub).new(limit=None):
                                     reddit.subreddit(sub).flair.set(comment.parent().author.name, taker_flair, "QuestFairer")
                                 else:
                                     reddit.subreddit(sub).flair.set(comment.parent().author.name, "2ᚬ", "QuestFairer")
-                                for flair in reddit.subreddit(sub).flair(redditor="Bobbbay", limit=None):
-                                    count_op_str = flair['flair_text']
-                                if ( count_op_str != "" ):
-                                    count_op = int(count_op_str.replace("ᚬ", ""))
-                                    count_op += 1
-                                    op_flair = "{0}ᚬ".format(count_op)
-                                    reddit.subreddit(sub).flair.set(submission.author.name, op_flair, "QuestFairer")
-                                else:
-                                    reddit.subreddit(sub).flair.set(submission.author.name, "1ᚬ", "QuestFairer")
+
                                 submission.flair.select(None, "Completed!")
                                 submission.save()
                                 reply = 'This quest has been completed, but feel free to go ahead and recomplete this quest! \n\n^Upvote ^me ^if ^you ^think ^this ^quest ^was ^quite ^nice^. ^Beep ^boop^. ^Contact ^my ^creator ^Bobbbay^.'
