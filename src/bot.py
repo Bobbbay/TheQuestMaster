@@ -44,7 +44,7 @@ for submission in reddit.subreddit(sub).new(limit=None):
                             if(find(comment.parent().body) != [] or thelink != ""):
                                 for flair in reddit.subreddit(sub).flair(redditor=submission.author, limit=None):
                                     count_op_str = flair['flair_text']
-                                if ( count_op_str != "" ):
+                                if ( count_op_str != None ):
                                     print(count_op_str)
                                     count_op = int(count_op_str.replace("ᚬ", ""))
                                     count_op += 1
