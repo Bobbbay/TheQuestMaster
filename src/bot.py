@@ -1,8 +1,7 @@
 import praw
 import os
 import re
-import re
-from bs4 import BeautifulSoup as BS
+#from bs4 import BeautifulSoup as BS
 
 sub = "RedditsQuests"
 
@@ -23,54 +22,34 @@ def find(string):
 
 for submission in reddit.subreddit(sub).new(limit=None):
     submission.comments.replace_more(limit=None)
-    for comment in submission.comments.list():
-        if (re.search('!completed', comment.body, re.IGNORECASE) is not None):
-                print(comment.author.moderated())
-                if (comment.is_submitter or 'RedditsQuests' in comment.author.moderated()):
-                    if submission.saved is False:
-                        if (comment.parent().author.name is not submission.author.name):
-
-                            soup = BS("""
-                            <i class="fa fa-edit"></i> Edit
-                            """)
-
-                            links = soup.find_all('a')
-
-                            thelink = ""
-                            for link in links:
-                                if link.find(text=re.compile("Edit")):
-                                    thelink = link
-                                    break
-
-                            if(find(comment.parent().body) != [] or thelink != ""):
-                                for flair in reddit.subreddit(sub).flair(redditor=submission.author, limit=None):
-                                    count_op_str = flair['flair_text']
-                                try:
-                                    if ( count_op_str is not None or count_op_str != ""):
-                                        print("!" + count_op_str + "!")
-                                        count_op = int(count_op_str.replace("ᚬ", ""))
-                                        count_op += 1
-                                        op_flair = "{0}ᚬ".format(count_op)
-                                        reddit.subreddit(sub).flair.set(submission.author.name, op_flair, "QuestFairer")
-                                    else:
-                                        reddit.subreddit(sub).flair.set(submission.author.name, "1ᚬ", "QuestFairer")
-                                except:
-                                    print("Stuff")
-                                completer = ""
-                                if comment.parent().author_flair_text and comment.parent().author_flair_text.endswith("ᚬ"):
-                                    count_taker = int(comment.parent().author_flair_text.replace("ᚬ",""))
-                                    count_taker += 2
-                                    taker_flair = "{0}ᚬ".format(count_taker)
-                                    completer = comment.parent().author.name
-                                    reddit.subreddit(sub).flair.set(comment.parent().author.name, taker_flair, "QuestFairer")
-                                else:
-                                    reddit.subreddit(sub).flair.set(comment.parent().author.name, "2ᚬ", "QuestFairer")
-
-                                submission.flair.select(None, "Completed!")
-                                submission.save()
-                                reply = 'This quest has been completed, but feel free to go ahead and recomplete this quest! \n\n^Upvote ^me ^if ^you ^think ^this ^quest ^was ^quite ^nice^. ^Beep ^boop^. ^Contact ^my ^creator ^Bobbbay^.'
-                                submission.reply(reply).mod.distinguish(sticky=True)
-                            else:
-                                comment.mod.remove()
-                                submission.author.message('Your comment in r/redditsquests has been removed', 'We only allow approvals that contain links. It\'s not your fault, but next time make sure the person who has completed the quest provides a link. PM u/MaxwellIsSmall for questions about this sub\'s rules and u/Bobbbay for any questions, concerns, or comments about the bot. ')
-                        break
+    if submission.saved is False:
+        for comment in submission.comments.list():
+            if ((re.search('!completed', comment.body, re.IGNORECASE) is not None) and (comment.is_submitter or 'RedditsQuests' in comment.author.moderated()) and (comment.parent().author.name is not submission.author.name)):
+                #if(find(comment.parent().body) != []):
+                for flair in reddit.subreddit(sub).flair(redditor=submission.author, limit=None):
+                    count_op_str = flair['flair_text']
+                try:
+                    if ( count_op_str is not None or count_op_str != ""):
+                        count_op = int(count_op_str.replace("ᚬ", ""))
+                        count_op += 1
+                        op_flair = "{0}ᚬ".format(count_op)
+                        reddit.subreddit(sub).flair.set(submission.author.name, op_flair, "QuestFairer")
+                    else:
+                        reddit.subreddit(sub).flair.set(submission.author.name, "1ᚬ", "QuestFairer")
+                except:
+                    print()
+                if comment.parent().author_flair_text and comment.parent().author_flair_text.endswith("ᚬ"):
+                    count_taker = int(comment.parent().author_flair_text.replace("ᚬ",""))
+                    count_taker += 2
+                    taker_flair = "{0}ᚬ".format(count_taker)
+                    reddit.subreddit(sub).flair.set(comment.parent().author.name, taker_flair, "QuestFairer")
+                else:
+                    reddit.subreddit(sub).flair.set(comment.parent().author.name, "2ᚬ", "QuestFairer")
+                submission.flair.select(None, "Completed!")
+                submission.save()
+                reply = 'This quest has been completed, but feel free to go ahead and recomplete this quest! \n\n^Beep ^boop^.'
+                submission.reply(reply).mod.distinguish(sticky=True)
+                #else:
+                    comment.mod.remove()
+                    submission.author.message('Your comment in r/redditsquests has been removed', 'We only allow approvals that contain links. It\'s not your fault, but next time make sure the person who has completed the quest provides a link. PM u/MaxwellIsSmall for questions about this sub\'s rules and u/Bobbbay for any questions, concerns, or comments about the bot. ')
+                break
