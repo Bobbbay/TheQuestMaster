@@ -25,7 +25,8 @@ for submission in reddit.subreddit(sub).new(limit=None):
     submission.comments.replace_more(limit=None)
     for comment in submission.comments.list():
         if (re.search('!completed', comment.body, re.IGNORECASE) is not None):
-                if comment.is_submitter:
+                print(comment.author.moderated())
+                if (comment.is_submitter or 'RedditsQuests' in comment.author.moderated()):
                     if submission.saved is False:
                         if (comment.parent().author.name is not submission.author.name):
 
@@ -44,14 +45,17 @@ for submission in reddit.subreddit(sub).new(limit=None):
                             if(find(comment.parent().body) != [] or thelink != ""):
                                 for flair in reddit.subreddit(sub).flair(redditor=submission.author, limit=None):
                                     count_op_str = flair['flair_text']
-                                if ( count_op_str != None ):
-                                    print(count_op_str)
-                                    count_op = int(count_op_str.replace("ᚬ", ""))
-                                    count_op += 1
-                                    op_flair = "{0}ᚬ".format(count_op)
-                                    reddit.subreddit(sub).flair.set(submission.author.name, op_flair, "QuestFairer")
-                                else:
-                                    reddit.subreddit(sub).flair.set(submission.author.name, "1ᚬ", "QuestFairer")
+                                try:
+                                    if ( count_op_str is not None or count_op_str != ""):
+                                        print("!" + count_op_str + "!")
+                                        count_op = int(count_op_str.replace("ᚬ", ""))
+                                        count_op += 1
+                                        op_flair = "{0}ᚬ".format(count_op)
+                                        reddit.subreddit(sub).flair.set(submission.author.name, op_flair, "QuestFairer")
+                                    else:
+                                        reddit.subreddit(sub).flair.set(submission.author.name, "1ᚬ", "QuestFairer")
+                                except:
+                                    print("Stuff")
                                 completer = ""
                                 if comment.parent().author_flair_text and comment.parent().author_flair_text.endswith("ᚬ"):
                                     count_taker = int(comment.parent().author_flair_text.replace("ᚬ",""))
