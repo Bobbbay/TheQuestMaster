@@ -26,8 +26,7 @@ for submission in reddit.subreddit(sub).new(limit=None):
         for comment in submission.comments.list():
             if ((re.search('!completed', comment.body, re.IGNORECASE) is not None) and (comment.is_submitter or 'RedditsQuests' in comment.author.moderated()) and (comment.parent().author.name is not submission.author.name)):
                 #if(find(comment.parent().body) != []):
-                for flair in reddit.subreddit(sub).flair(redditor=submission.author, limit=None):
-                    count_op_str = flair['flair_text']
+                count_op_str = submission.author_flair_text
                 try:
                     if ( count_op_str is not None or count_op_str != ""):
                         count_op = int(count_op_str.replace("ᚬ", ""))
