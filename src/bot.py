@@ -20,7 +20,7 @@ def find(string):
     url = re.findall(regex,string)       
     return [x[0] for x in url] 
 
-for submission in reddit.subreddit(sub).new(limit=None):
+for submission in reddit.subreddit(sub).new(limit=10):
     submission.comments.replace_more(limit=None)
     if submission.saved is False:
         for comment in submission.comments.list():
