@@ -16,7 +16,7 @@ reddit = praw.Reddit(client_id=client_id,
 
 def find(string): 
     match = r"(?:[\w]+)?://[^/\s?#]+[^\s?#]+(?:\?[^\s#]*)?(?:#[^\s]*)?"
-    return match and match.groupdict() == string:
+    return match and match.groupdict() == string
 
 for submission in reddit.subreddit(sub).new(limit=None):
     print("Started")
