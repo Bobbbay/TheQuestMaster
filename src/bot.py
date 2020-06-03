@@ -15,9 +15,8 @@ reddit = praw.Reddit(client_id=client_id,
                      username='TheQuestMaster')
 
 def find(string): 
-    regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
-    url = re.findall(regex,string)       
-    return [x[0] for x in url] 
+    match = r"(?:[\w]+)?://[^/\s?#]+[^\s?#]+(?:\?[^\s#]*)?(?:#[^\s]*)?"
+    return match and match.groupdict() == string:
 
 for submission in reddit.subreddit(sub).new(limit=None):
     print("Started")
