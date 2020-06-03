@@ -21,6 +21,7 @@ def find(string):
 
 for submission in reddit.subreddit(sub).new(limit=None):
     print("Started")
+    print(submission.name)
     submission.comments.replace_more(limit=None)
     print("Replaced more?")
     if submission.saved is False:
