@@ -27,7 +27,7 @@ for submission in reddit.subreddit(sub).new(limit=None):
         print("Submission is not saved yet xD")
         for comment in submission.comments.list():
             print("Going through comments")
-            if ((("!completed" in comment.body) or ("!complete" in comment.body)) and (comment.is_submitter or 'RedditsQuests' in comment.author.moderated()) and (comment.parent().author.name is not submission.author.name)):
+            if ((("!completed" in comment.body)) and (comment.is_submitter or 'RedditsQuests' in comment.author.moderated()) and (comment.parent().author.name is not submission.author.name)):
                 #if(find(comment.parent().body) != []):
                 print("Wow big if statement")
                 count_op_str = submission.author_flair_text
