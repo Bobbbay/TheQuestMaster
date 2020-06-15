@@ -64,7 +64,7 @@ for submission in reddit.subreddit(sub).new(limit=None):
                     print("Finished! Breaking...")
                 else:
                     print("No link buddy!")
-                    comment.mod.remove()
-                    submission.author.message('Your comment in r/redditsquests has been removed', 'We only allow approvals that contain links. It\'s not your fault, but next time make sure the person who has completed the quest provides a link. PM u/MaxwellIsSmall for questions about this sub\'s rules and u/Bobbbay for any questions, concerns, or comments about the bot. ')
+                    #comment.mod.remove()
+                    #submission.author.message('Your comment in r/redditsquests has been removed', 'We only allow approvals that contain links. It\'s not your fault, but next time make sure the person who has completed the quest provides a link. PM u/MaxwellIsSmall for questions about this sub\'s rules and u/Bobbbay for any questions, concerns, or comments about the bot. ')
         else:
             continue
