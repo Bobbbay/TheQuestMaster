@@ -14,6 +14,9 @@ reddit = praw.Reddit(client_id=client_id,
                      user_agent='r/RedditsQuests bot',
                      username='TheQuestMaster')
 
+for flair in reddit.subreddit(sub).flair(limit=None):
+    print(flair)
+
 def find(string): 
     match = re.search(r"(?:[\w]+)?://[^/\s?#]+[^\s?#]+(?:\?[^\s#]*)?(?:#[^\s]*)?", string)
     if(match):
