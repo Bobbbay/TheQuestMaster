@@ -15,8 +15,11 @@ reddit = praw.Reddit(client_id=client_id,
                      username='TheQuestMaster')
 
 def find(string): 
-    match = r"(?:[\w]+)?://[^/\s?#]+[^\s?#]+(?:\?[^\s#]*)?(?:#[^\s]*)?"
-    return match and match.groupdict() == string
+    match = re.search(r"(?:[\w]+)?://[^/\s?#]+[^\s?#]+(?:\?[^\s#]*)?(?:#[^\s]*)?", string)
+    if(match):
+      return True;
+    else:
+      return False;
 
 moderators = list(reddit.subreddit(sub).moderator())
 for submission in reddit.subreddit(sub).new(limit=None):
