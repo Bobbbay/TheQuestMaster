@@ -60,6 +60,7 @@ for submission in reddit.subreddit(sub).new(limit=None):
                         print("Adding to the new quest doer")
                         reddit.subreddit(sub).flair.set(comment.parent().author.name, "2ᚬ", "QuestFairer")
                     print("All done, adding flairs now")
+                    print(submission.flair.choices())
                     submission.flair.select(None, "Completed!")
                     submission.save()
                     reply = 'This quest has been completed, but feel free to go ahead and recomplete this quest! \n\n^Beep ^boop^.'
