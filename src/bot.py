@@ -1,6 +1,7 @@
 import praw
 import os
 import re
+import json
 
 sub = "RedditsQuests"
 
@@ -17,7 +18,7 @@ reddit = praw.Reddit(client_id=client_id,
 
 flairsInSub = ""
 for flair in reddit.subreddit(sub).flair(limit=None):
-    flairsInSub += flair
+    flairsInSub += json.dumps(flair)
 f = open("../TheQuestMasterLeaderboard/main.txt", "w")
 f.write(flairsInSub)
 f.close()
