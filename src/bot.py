@@ -15,10 +15,9 @@ reddit = praw.Reddit(client_id=client_id,
                      user_agent='r/RedditsQuests bot',
                      username='TheQuestMaster')
 
-
 flairsInSub = ""
 for flair in reddit.subreddit(sub).flair(limit=None):
-    flairsInSub += json.dumps(flair)
+    flairsInSub += "{}".format(flair)
 f = open("../TheQuestMasterLeaderboard/main.txt", "w")
 f.write(flairsInSub)
 f.close()
