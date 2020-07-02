@@ -46,6 +46,7 @@ for submission in reddit.subreddit(sub).new(limit=None):
                     count_op_str = submission.author_flair_text
                     try:
                         print("Trying this thing I should not be doing xD")
+                        print("count_op_str: " + count_op_str)
                         if ( count_op_str is not None or count_op_str != ""):
                             count_op = int(count_op_str.replace("ᚬ", ""))
                             count_op += 1
