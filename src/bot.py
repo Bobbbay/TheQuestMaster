@@ -70,7 +70,7 @@ for submission in reddit.subreddit(sub).new(limit=None):
                     submission.flair.select(None, "Completed!")
                     submission.save()
                     reply = 'This quest has been completed, but feel free to go ahead and recomplete this quest! \n\n^Beep ^boop^.'
-                    submission.reply(reply).mod.distinguish(sticky=True)
+                    #submission.reply(reply).mod.distinguish(sticky=True)
                     print("Finished! Breaking...")
                 else:
                     print("No link buddy!")
